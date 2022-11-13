@@ -4,9 +4,11 @@
         Add
     </button>
     <H1>Elementów na liście: {{counter}}</H1>
+    <H1>Elementów już wykonanych: {{doneTasks}}</H1>
     <ol>
         <li *ngFor="let task of taskList">
-            {{task}}
+            {{task.name}}
+            <input type = "checkbox" [checked]="task.isChecked" (change)="onTaskStatusChange(task)"/>
         </li>
     </ol>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CounterServiceService } from '../counter-service.service';
+import { Task } from '../models/task';
 
 @Component({
   selector: 'app-tasks',
@@ -12,20 +13,25 @@ export class TasksComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.taskList.push("ziemniaki");
+    let initialTask = new Task(1, "ziemniaki", false);
+    this.taskList.push(initialTask);
     this.counter = this.taskList.length;
   }
 
   counter:number = 0;
-  taskList:Array<any> = [];
+  taskList:Array<Task> = [];
+  doneTasks:number = 0;
 
   addTask(): void{
     let name = "ziemniaki" + (this.counter + 1);
-    this.taskList.push(name);
+    let newTask = new Task (this.taskList[this.taskList.length-1].id +1, name, false)
+    this.taskList.push(newTask);
     this.counter = this.counterService.getCounterValue(this.taskList);
   }
 
-  checkAsDone():void{
-
+  onTaskStatusChange(taskToChange: Task):void{
+    taskToChange.isChecked = !taskToChange.isChecked;
+    this.doneTasks = this.counterService.getDoneTasksNumber(this.taskList);
   }
+
 }
