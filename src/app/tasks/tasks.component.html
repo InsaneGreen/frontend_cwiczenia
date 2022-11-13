@@ -1,0 +1,12 @@
+<p>tasks works!</p>
+<div>
+    <button (click) = "addTask()">
+        Add
+    </button>
+    <H1>Elementów na liście: {{counter}}</H1>
+    <ol>
+        <li *ngFor="let task of taskList">
+            {{task}}
+        </li>
+    </ol>
+</div>
